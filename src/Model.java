@@ -47,8 +47,8 @@ public class Model{
 	}
 	
 	public void makeFood(ArrayList<Coords> arr) {
-		foodX = (int)(Math.random()*41);
-		foodY = (int)(Math.random()*31);
+		foodX = (int)(Math.random()*40);
+		foodY = (int)(Math.random()*30);
 		Coords foodCoords = new Coords(foodX, foodY);
 		for(Coords c : arr) {
 			if(c.getX() == foodCoords.getX() && c.getY() == foodCoords.getY()) {
@@ -56,7 +56,7 @@ public class Model{
 				makeFood(arr);
 			}
 		}
-		System.out.println("food is at: (" + foodX + ", " + foodY + ")");
+		//System.out.println("food is at: (" + foodX + ", " + foodY + ")");
 	}
 	
 	public int getFoodX() {
