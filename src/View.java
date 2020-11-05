@@ -45,7 +45,6 @@ public class View{
                 root.getChildren().addAll(rec);
             }
         }
-        root.setGridLinesVisible(true);
         
 	}
 	
@@ -57,7 +56,26 @@ public class View{
         GridPane.setRowIndex(rec, y);
         GridPane.setColumnIndex(rec, x);
         root.getChildren().add(rec);
-        root.setGridLinesVisible(true);
+	}
+	
+	public void delSnake(int x, int y) {
+		Rectangle rec = new Rectangle();
+        rec.setWidth(20);
+        rec.setHeight(20);
+        rec.setFill(bgColor);
+        GridPane.setRowIndex(rec, y);
+        GridPane.setColumnIndex(rec, x);
+        root.getChildren().add(rec);
+	}
+	
+	public void drawFood(int x, int y) {
+		Rectangle rec = new Rectangle();
+        rec.setWidth(20);
+        rec.setHeight(20);
+        rec.setFill(Color.RED);
+        GridPane.setRowIndex(rec, y);
+        GridPane.setColumnIndex(rec, x);
+        root.getChildren().add(rec);
 	}
 	
 }

@@ -12,18 +12,22 @@ public class Controller extends Application {
 	//data fields hold Model and View
 	private Model model;
 	private View view;
+	private Snake snake;
 
     public static void main(String[] args) {
     	launch(args);
     }
 
-    boolean left, right, up, down;
+    boolean left, up, down;
+    boolean right = true;
+    int i = 0;
     
     @Override
 	public void start(Stage theStage) {
     	System.out.println("start");
         view = new View(theStage);
         model = new Model();
+        snake = new Snake(model);
 		//model = new Model(view.getWidth(), view.getHeight(), view.getImageWidth(), view.getImageHeight());
         new AnimationTimer() {
             public void handle(long currentNanoTime)
@@ -44,7 +48,22 @@ public class Controller extends Application {
                     }
             	});
                 model.update(up, down, left, right);
+                Coords c = snake.updatePositions();
+                if(c.getX() != -99) {
+                	view.delSnake(c.getX(), c.getY());
+                }
+                
+                if(model.eatFoodCheck(snake.getPositions())) {
+                	view.drawFood(model.getFoodX(), model.getFoodY());
+                }
+                
+                if(i == 1) {
+                	model.makeFood(snake.getPositions());
+                	view.drawFood(model.getFoodX(), model.getFoodY());
+                }
                 view.update(model.getSnakeX(), model.getSnakeY());
+                model.selfHitCheck(snake.getPositions());
+                i++;
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
