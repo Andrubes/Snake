@@ -19,6 +19,8 @@ public class Snake{
 		return length;
 	}
 	
+	//adds the new Coords of the snake head to the positions list
+	//removes the Coords for the back of the snake if the size of the list is larger than the length of the snake
 	public Coords updatePositions() {
 		setLength();
 		positions.add(new Coords(model.getSnakeX(), model.getSnakeY()));

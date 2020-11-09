@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 
 
 public class View{
-
 	public static Scene theScene;
 	GridPane root = new GridPane();
 	private int xSize = 40;
@@ -32,47 +31,36 @@ public class View{
         theStage.show();
 	}
 	
+	//Draws the board and colors it black
 	public void makeBoard() {
-		//makes the squares and colors them in to the bacground color
         for (int row = 0; row < ySize; row++) {
             for (int col = 0; col < xSize; col++) {
-                Rectangle rec = new Rectangle();
-                rec.setWidth(20);
-                rec.setHeight(20);
-                rec.setFill(bgColor);
-                GridPane.setRowIndex(rec, row);
-                GridPane.setColumnIndex(rec, col);
-                root.getChildren().addAll(rec);
+                makeRec(bgColor, col, row);
             }
         }
-        
 	}
 	
+	//updates according to the snakes position
 	public void update(int x, int y) {
-		Rectangle rec = new Rectangle();
-        rec.setWidth(20);
-        rec.setHeight(20);
-        rec.setFill(Color.PALEGREEN);
-        GridPane.setRowIndex(rec, y);
-        GridPane.setColumnIndex(rec, x);
-        root.getChildren().add(rec);
+		makeRec(Color.PALEGREEN, x, y);
 	}
 	
+	//makes the square at the end of the snakes tail black
 	public void delSnake(int x, int y) {
-		Rectangle rec = new Rectangle();
-        rec.setWidth(20);
-        rec.setHeight(20);
-        rec.setFill(bgColor);
-        GridPane.setRowIndex(rec, y);
-        GridPane.setColumnIndex(rec, x);
-        root.getChildren().add(rec);
+        makeRec(bgColor, x, y);
 	}
 	
+	//places the food on the board
 	public void drawFood(int x, int y) {
+		makeRec(Color.RED, x, y);
+	}
+	
+	//draws a rectangle the size of one cell of the grid. used for multiple purposes
+	public void makeRec(Color c, int x, int y) {
 		Rectangle rec = new Rectangle();
         rec.setWidth(20);
         rec.setHeight(20);
-        rec.setFill(Color.RED);
+        rec.setFill(c);
         GridPane.setRowIndex(rec, y);
         GridPane.setColumnIndex(rec, x);
         root.getChildren().add(rec);
